@@ -13,7 +13,7 @@ class Solution(object):
         final_list = [i for i,k in sorted_dict[:k]]
         return final_list
     
-# Solution 2 Using heap to sort(Hashmap + Priority Queue)
+# Solution 2 Using heap to sort(Hashmap + min heap (python only has min heap so i inputted negative count to get max count on top))
 from collections import defaultdict
 import heapq
 class Solution(object):
@@ -32,4 +32,20 @@ class Solution(object):
             count , val = heapq.heappop(pq)
             result.append(val)
         return result
-                
+
+# Solution 3 Using heap to sort(Hashmap + Priority Queue(length of heap == length of k)) for Best time complexity
+from collections import defaultdict
+import heapq
+class Solution(object):
+    def topKFrequent(self, nums, k):
+        freq = defaultdict(int)
+        for num in nums:
+            freq[num] +=1
+
+        pq = []
+        for key, count in freq.items():
+            heapq.heappush(pq, (count,key))
+            if len(pq) > k:
+                heapq.heappop(pq)
+        result = [num for count, num in pq]
+        return result
