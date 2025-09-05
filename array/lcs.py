@@ -22,3 +22,23 @@ class Solution(object):
         lcs = max(lcs,curr)
         return lcs
         
+# Solution 2: Using Set 
+class Solution(object):
+    def longestConsecutive(self, nums):
+        if not nums:
+            return 0
+        else:
+            n = set()
+            lcs = 1
+            for num in nums:
+                n.add(num)
+            for num in n:
+                if (num-1) in n: continue
+                else :
+                    curr =1
+                    currentNo = num
+                    while (currentNo+1 in n):
+                        curr+=1
+                        currentNo +=1
+                    lcs = max(curr,lcs)
+        return lcs
