@@ -31,3 +31,39 @@ class Solution(object):
 
         return result
                 
+# OR THE BELOW CODE
+class Solution(object):
+    def productExceptSelf(self, nums):
+        n = len(nums)
+        prefix = [1] * n
+        postfix = [1] * n
+        result = [1] * n
+        for i in range(1,n):
+            prefix[i] = prefix[i-1] * nums[i-1]
+            p = n-1-i
+            postfix[p] = postfix[p+1] * nums[p+1]
+            
+        for i in range(n):
+            result[i] = prefix[i]*postfix[i]
+
+        return result
+
+# Optimal Solution
+class Solution(object):
+    def productExceptSelf(self, nums):
+        n = len(nums)
+        prefix = 1
+        postfix = 1
+        result = [1] * n
+        for i in range(1,n):
+            p = n-1-i
+            result[i-1] *= prefix
+            result[p+1] *= postfix
+            prefix*= nums[i-1]
+            postfix*= nums[p+1]
+
+        result[n-1] *= prefix
+        result[0] *= postfix
+
+        return result
+                
