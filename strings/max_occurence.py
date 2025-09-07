@@ -20,4 +20,21 @@ class Solution(object):
 
         return ans
             
+# Using Hashmap to reduce time complexity
+class Solution(object):
+    def characterReplacement(self, s, k):
+        n=len(s)
+        l=0
+        r=0
+        alpha = {}
+        max_occ = 0
+        for r in range(n):
+            alpha[s[r]]= alpha.get(s[r],0)+1
+            max_occ = max(max_occ,alpha[s[r]])
+            if r-l+1-max_occ >k:
+                alpha[s[l]] -=1
+                l+=1
+        return n-l
+            
+        
         
